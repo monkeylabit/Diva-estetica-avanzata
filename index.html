@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html class="light" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Jost:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "inverse-primary": "#fab5b7",
+                    "on-tertiary-fixed-variant": "#5c3f42",
+                    "inverse-surface": "#313030",
+                    "on-tertiary-fixed": "#2b1518",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#fcf9f8",
+                    "tertiary-fixed": "#ffd9dc",
+                    "on-surface": "#1c1b1b",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#B37679",
+                    "on-error": "#ffffff",
+                    "primary": "#B37679",
+                    "primary-fixed": "#ffdada",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#77565a",
+                    "primary-fixed-dim": "#fab5b7",
+                    "on-primary-fixed-variant": "#6a383c",
+                    "secondary-fixed": "#ffd9dd",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-container": "#fffbff",
+                    "tertiary-container": "#8d6c6f",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-primary-container": "#fffbff",
+                    "secondary-fixed-dim": "#e6bcc1",
+                    "on-primary-fixed": "#350e12",
+                    "on-background": "#1c1b1b",
+                    "surface-container-high": "#eae7e7",
+                    "surface-tint": "#B37679",
+                    "tertiary": "#735457",
+                    "tertiary-fixed-dim": "#e4bdc0",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#2d1419",
+                    "on-secondary-fixed-variant": "#5d3f43",
+                    "surface-container-low": "#f6f3f2",
+                    "surface-dim": "#dcd9d9",
+                    "surface-container": "#f0eded",
+                    "surface-container-highest": "#e5e2e1",
+                    "error": "#ba1a1a",
+                    "background": "#fcf9f8",
+                    "outline-variant": "#d6c2c2",
+                    "on-surface-variant": "#524344",
+                    "error-container": "#ffdad6",
+                    "surface": "#fcf9f8",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#847373",
+                    "secondary-container": "#fed2d7",
+                    "on-secondary-container": "#7a585d"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "2xl": "1rem",
+                    "full": "9999px"
+                },
+                "fontFamily": {
+                    "headline": ["Gilda Display", "serif"],
+                    "body": ["Jost", "sans-serif"],
+                    "label": ["Jost", "sans-serif"]
+                }
+            }
+        }
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+    }
+    .editorial-shadow {
+        box-shadow: 0 20px 60px rgba(28, 27, 27, 0.10);
+    }
+    .soft-shadow {
+        box-shadow: 0 4px 24px rgba(28, 27, 27, 0.06);
+    }
+    .font-great-vibes {
+        font-family: 'Great Vibes', cursive;
+        font-size: 5rem;
+        line-height: 1;
+    }
+    .nav-link {
+        position: relative;
+    }
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #B37679;
+        transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+        width: 100%;
+    }
+    .result-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+    }
+    .result-card img {
+        transition: transform 0.6s ease;
+    }
+    .result-card:hover img {
+        transform: scale(1.03);
+    }
+    .result-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem;
+        background: linear-gradient(to top, rgba(28,27,27,0.75) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .result-card:hover .result-overlay {
+        opacity: 1;
+    }
+    html {
+        scroll-behavior: smooth;
+        overflow-x: clip;
+    }
+    body {
+        overflow-x: hidden;
+    }
+    /* ── 3D rotating carousel ── */
+    .scene, .a3d { display: grid; }
+    .scene {
+        overflow: hidden;
+        perspective: 45em;
+        -webkit-mask: linear-gradient(90deg, #0000, red 15% 85%, #0000);
+        mask: linear-gradient(90deg, #0000, red 15% 85%, #0000);
+        height: 32em;
+        width: 100%;
+        margin: 2.5rem 0 1rem;
+    }
+    .a3d {
+        place-self: center;
+        transform-style: preserve-3d;
+        animation: ry 32s linear infinite;
+    }
+    .a3d:hover { animation-play-state: paused; }
+    @keyframes ry { to { rotate: y 1turn; } }
+    .card {
+        --w: 15em;
+        --ba: 1turn / var(--n);
+        grid-area: 1 / 1;
+        width: var(--w);
+        aspect-ratio: 7 / 10;
+        object-fit: cover;
+        border-radius: 1.5em;
+        backface-visibility: hidden;
+        box-shadow: 0 8px 40px rgba(28,27,27,0.22);
+        transform:
+            rotatey(calc(var(--i) * var(--ba)))
+            translatez(calc(-1 * (.5 * var(--w) + .5em) / tan(.5 * var(--ba))));
+    }
+    @media (prefers-reduced-motion: reduce) { .a3d { animation-duration: 128s; } }
+    #ba-slider::-webkit-scrollbar { display: none; }
+    #ba-slider.grabbing { cursor: grabbing; }
+    body {
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+    }
+    h2, h3, h4 {
+        font-weight: 500;
+    }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container">
+
+<!-- Navigation -->
+<nav class="top-0 sticky z-50 bg-white/80 backdrop-blur-xl border-b border-primary/10">
+    <div class="flex justify-between items-center w-full px-8 md:px-12 py-4 max-w-screen-xl mx-auto">
+        <!-- Logo -->
+        <a href="#">
+            <img src="logo.png" alt="Diva Estetica Avanzata" class="h-14 w-auto object-contain"/>
+        </a>
+        <!-- Links -->
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#chi-siamo">Chi Siamo</a>
+            <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#servizi">Servizi</a>
+            <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#risultati">Risultati</a>
+            <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#convenzioni">Convenzioni</a>
+            <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#contatti">Contatti</a>
+        </div>
+        <!-- CTA -->
+        <a href="#contatti" class="bg-primary text-on-primary px-7 py-3 rounded-xl font-body tracking-widest uppercase text-xs font-semibold hover:bg-primary/90 transition-all duration-300 ease-in-out active:scale-95 soft-shadow">
+            Prenota Ora
+        </a>
+    </div>
+</nav>
+
+<main>
+<!-- ─── HERO ─── -->
+<section class="relative min-h-[92vh] flex items-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img class="w-full h-full object-cover" src="sfondohero.jpg" alt="Diva Estetica Avanzata"/>
+        <!-- overlay scuro sul lato sinistro per leggibilità del testo, lascia destra visibile -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-black/10"></div>
+    </div>
+    <div class="container mx-auto px-8 md:px-16 relative z-10 py-24 flex flex-col items-center text-center">
+        <span class="font-body tracking-[0.35em] uppercase text-primary-fixed-dim text-xs mb-8 block">Roma · Via Flavio Stilicone 80/82</span>
+        <img src="logo.png" alt="Diva Estetica Avanzata" class="h-36 md:h-52 w-auto object-contain mb-6"/>
+        <span class="font-great-vibes text-primary-fixed-dim block mb-8">Cura e Benessere</span>
+        <p class="text-lg text-white/75 font-body max-w-lg mb-10 leading-relaxed">
+            Un approccio scientifico alla bellezza. Dove l'innovazione tecnologica incontra il calore di un trattamento sartoriale.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#servizi" class="bg-primary text-white px-9 py-4 rounded-xl text-sm font-semibold tracking-widest uppercase hover:bg-primary/90 transition-all duration-300 editorial-shadow">
+                Scopri i Trattamenti
+            </a>
+            <a href="#chi-siamo" class="border border-white/40 text-white px-9 py-4 rounded-xl text-sm font-semibold tracking-widest uppercase hover:bg-white/10 transition-all duration-300">
+                Chi Siamo
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Onda di transizione hero → chi siamo -->
+<div style="position:relative;z-index:1;margin-top:-79px;line-height:0;pointer-events:none;">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:80px;display:block;">
+        <path d="M0,40 C240,0 480,80 720,40 C960,0 1200,80 1440,40 L1440,80 L0,80 Z" fill="#fcf9f8"/>
+    </svg>
+</div>
+
+<!-- ─── CHI SIAMO ─── -->
+<section id="chi-siamo" class="pb-10 pt-16 bg-surface">
+    <div class="container mx-auto px-8 md:px-12 max-w-screen-xl">
+        <div class="max-w-2xl mx-auto text-center">
+            <img src="logo%20alto.png" alt="Diva Estetica Avanzata" class="h-20 w-auto object-contain mx-auto mb-6"/>
+            <span class="text-xs font-body tracking-[0.4em] uppercase text-primary mb-4 block">Eredità e Passione</span>
+            <h2 class="text-5xl font-headline mb-6 leading-tight">Chi Siamo</h2>
+            <div class="w-12 h-px bg-primary mb-8 mx-auto"></div>
+            <div class="space-y-5 text-base text-on-surface-variant leading-relaxed text-left">
+                <p>Diva Estetica Avanzata è un centro specializzato in trattamenti estetici innovativi, dedicato alla cura della persona, al benessere e alla valorizzazione della bellezza naturale.</p>
+                <p>Operiamo con metodologie all'avanguardia e personale altamente qualificato, garantendo professionalità, sicurezza e risultati visibili in un ambiente di assoluto relax.</p>
+                <p>Il nostro obiettivo è offrire percorsi personalizzati che uniscano estetica e benessere, migliorando la qualità della vita dei nostri clienti attraverso trattamenti efficaci e non invasivi.</p>
+            </div>
+            <a href="#servizi" class="inline-flex items-center gap-2 mt-10 text-sm font-semibold tracking-widest uppercase text-primary hover:gap-4 transition-all duration-300">
+                Scopri i Servizi
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Onda di transizione chi siamo → servizi -->
+<div style="display:block;line-height:0;margin:0;padding:0;background-color:#fcf9f8;">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:80px;display:block;">
+        <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#f6f3f2"/>
+    </svg>
+</div>
+
+<!-- ─── SERVIZI ─── -->
+<section id="servizi" class="py-28 bg-surface-container-low">
+    <div class="container mx-auto px-8 md:px-12 max-w-screen-xl">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+                <span class="text-xs font-body tracking-[0.4em] uppercase text-primary mb-4 block">Percorsi di Benessere</span>
+                <h2 class="text-5xl font-headline leading-tight">I Nostri Servizi</h2>
+            </div>
+            <p class="text-on-surface-variant max-w-xs text-sm leading-relaxed italic text-right">Trattamenti progettati per rigenerare mente e corpo con precisione clinica.</p>
+        </div>
+
+        <!-- Bento grid 4 colonne -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[300px] gap-5">
+
+            <!-- 01 Viso — 2 colonne -->
+            <div class="lg:col-span-2 rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                <img src="servizi/28875c8f2462450fb89a8cf0c20a9117.png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
+                <div class="relative z-10 flex justify-between items-start">
+                    <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">face_retouching_natural</span>
+                    <span class="font-headline text-7xl text-white/10 leading-none select-none">01</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <h3 class="text-2xl font-headline text-white mb-2">Viso</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Anti-age, idratazione profonda, rigenerazione cutanea e Hyaluron Pen.</p>
+                </div>
+            </div>
+
+            <!-- 02 Epilazione Laser -->
+            <div class="rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                <img src="servizi/Gemini_Generated_Image_uz4ls8uz4ls8uz4l%20(1).png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
+                <div class="relative z-10 flex justify-between items-start">
+                    <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">bolt</span>
+                    <span class="font-headline text-7xl text-white/10 leading-none select-none">02</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <h3 class="text-2xl font-headline text-white mb-2">Epilazione Laser</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Epilazione definitiva con tecnologie di ultima generazione.</p>
+                </div>
+            </div>
+
+            <!-- 03 Corpo -->
+            <div class="rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                <img src="servizi/bce6a66e2b884426a4d2c23529c87760.png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
+                <div class="relative z-10 flex justify-between items-start">
+                    <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">accessibility_new</span>
+                    <span class="font-headline text-7xl text-white/10 leading-none select-none">03</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <h3 class="text-2xl font-headline text-white mb-2">Corpo</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Rimodellamento, riduzione adiposità e tonificazione muscolare.</p>
+                </div>
+            </div>
+
+            <!-- 04 Massaggi -->
+            <div class="rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                <img src="servizi/cb5b335f5e8c462da2a1b75ee3c8611c.png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
+                <div class="relative z-10 flex justify-between items-start">
+                    <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">spa</span>
+                    <span class="font-headline text-7xl text-white/10 leading-none select-none">04</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <h3 class="text-2xl font-headline text-white mb-2">Massaggi</h3>
+                    <p class="text-white/70 text-sm leading-relaxed mb-4">Massaggi professionali e percorsi benessere per il tuo relax.</p>
+                    <span class="inline-flex items-center gap-1 text-xs uppercase tracking-widest font-semibold text-white/80 group-hover:gap-2 transition-all duration-300">
+                        Vedi Menu <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 05 Hyaluron Pen — 2 colonne -->
+            <div class="lg:col-span-2 rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                <img src="servizi/d968749b26864d75a23e84e6a82c2967.png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
+                <div class="relative z-10 flex justify-between items-start">
+                    <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">water_drop</span>
+                    <span class="font-headline text-7xl text-white/10 leading-none select-none">05</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <h3 class="text-2xl font-headline text-white mb-2">Hyaluron Pen</h3>
+                    <p class="text-white/70 text-sm leading-relaxed mb-4">Filler labbra, rughe e volume senza ago. Risultati immediati e naturali.</p>
+                    <span class="inline-flex items-center gap-1 text-xs uppercase tracking-widest font-semibold text-white/80 group-hover:gap-2 transition-all duration-300">
+                        Scopri <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 06 Consulenza & Nutrizione -->
+            <div class="rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                <img src="servizi/Gemini_Generated_Image_zbpxlnzbpxlnzbpx%20(1).png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
+                <div class="relative z-10 flex justify-between items-start">
+                    <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">person_search</span>
+                    <span class="font-headline text-7xl text-white/10 leading-none select-none">06</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <h3 class="text-2xl font-headline text-white mb-2">Consulenza &amp; Nutrizione</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Consulenze personalizzate con analisi estetica e piani benessere.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ─── RISULTATI ─── -->
+<section id="risultati" class="bg-surface overflow-hidden">
+    <!-- Header -->
+    <div class="pt-28 pb-2 text-center px-8">
+        <span class="text-xs font-body tracking-[0.4em] uppercase text-primary mb-4 block">Prima e Dopo</span>
+        <h2 class="text-4xl md:text-5xl font-headline mb-3">
+            Scopri le nostre <span class="text-primary">Trasformazioni</span>
+        </h2>
+        <p class="text-on-surface-variant text-sm leading-relaxed max-w-md mx-auto mt-2">Risultati reali, su clienti reali.</p>
+    </div>
+
+    <!-- 3D rotating carousel -->
+    <div class="scene">
+        <div class="a3d" style="--n:10">
+            <img class="card" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" style="--i:0" alt="Trasformazione 1"/>
+            <img class="card" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" style="--i:1" alt="Trasformazione 2"/>
+            <img class="card" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" style="--i:2" alt="Trasformazione 3"/>
+            <div class="card" style="--i:3;background:url('nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg') center 35% / 155% 155% no-repeat;"></div>
+            <img class="card" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" style="--i:4" alt="Trasformazione 5"/>
+            <img class="card" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" style="--i:5" alt="Trasformazione 6"/>
+            <img class="card" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" style="--i:6" alt="Trasformazione 7"/>
+            <img class="card" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" style="--i:7" alt="Trasformazione 8"/>
+            <img class="card" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" style="--i:8" alt="Trasformazione 9"/>
+            <img class="card" src="nostri%20risultati/centro.jpg"                                              style="--i:9" alt="Trasformazione 10"/>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="pb-24 flex flex-col items-center gap-5">
+        <a href="#contatti" class="bg-primary text-white px-9 py-4 rounded-xl text-sm font-semibold tracking-widest uppercase hover:bg-primary/90 transition-all duration-300 editorial-shadow">
+            Prenota la tua Consulenza
+        </a>
+        <a href="https://www.instagram.com/diva.estetica.avanzata" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-outline hover:text-primary transition-colors duration-300">
+            Vedi tutti su Instagram
+            <span class="material-symbols-outlined text-sm">open_in_new</span>
+        </a>
+    </div>
+</section>
+
+<!-- ─── TECNOLOGIE & PERCHÉ SCEGLIERCI ─── -->
+<section class="py-28 bg-surface-container-low">
+    <div class="container mx-auto px-8 md:px-12 max-w-screen-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+                <span class="text-xs font-body tracking-[0.4em] uppercase text-primary mb-4 block">Avanguardia Tecnologica</span>
+                <h2 class="text-5xl font-headline mb-6 leading-tight">Innovazione che genera Risultati</h2>
+                <div class="w-12 h-px bg-primary mb-8"></div>
+                <p class="text-base text-on-surface-variant mb-10 leading-relaxed">Utilizziamo protocolli certificati e prodotti di alta qualità, selezionati per garantire efficacia e sicurezza. Ogni trattamento è preceduto da una consulenza approfondita.</p>
+
+                <h3 class="text-lg font-headline text-primary mb-6 tracking-wide">Perché scegliere Diva Estetica Avanzata</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant/15 soft-shadow">
+                        <span class="material-symbols-outlined text-primary flex-shrink-0">verified</span>
+                        <p class="text-sm font-semibold text-on-surface">Professionalità e competenza certificata</p>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant/15 soft-shadow">
+                        <span class="material-symbols-outlined text-primary flex-shrink-0">person</span>
+                        <p class="text-sm font-semibold text-on-surface">Approccio personalizzato su ogni cliente</p>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant/15 soft-shadow">
+                        <span class="material-symbols-outlined text-primary flex-shrink-0">biotech</span>
+                        <p class="text-sm font-semibold text-on-surface">Metodologie e tecnologie innovative</p>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant/15 soft-shadow">
+                        <span class="material-symbols-outlined text-primary flex-shrink-0">spa</span>
+                        <p class="text-sm font-semibold text-on-surface">Ambiente accogliente e riservato</p>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant/15 soft-shadow">
+                        <span class="material-symbols-outlined text-primary flex-shrink-0">favorite</span>
+                        <p class="text-sm font-semibold text-on-surface">Attenzione al cliente in ogni fase del percorso</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side: prima/dopo comparison slider -->
+            <div id="ba-compare" class="editorial-shadow" style="position:relative;overflow:hidden;border-radius:1rem;cursor:ew-resize;user-select:none;touch-action:pan-y;">
+                <!-- Dopo — base layer -->
+                <img src="prima%20e%20dopo/dopo.jpg" style="display:block;width:100%;height:auto;" draggable="false" alt="Dopo"/>
+                <!-- Prima — clipped on right -->
+                <img id="ba-prima" src="prima%20e%20dopo/467428947_17916254823001823_8733858831901528883_n.jpg"
+                     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 50% 0 0);"
+                     draggable="false" alt="Prima"/>
+                <!-- Divider line -->
+                <div id="ba-line" style="position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,0.85);transform:translateX(-50%);pointer-events:none;">
+                    <!-- Handle circle -->
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:white;box-shadow:0 4px 20px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;">
+                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 11H15M7 11L4 8M7 11L4 14M15 11L18 8M15 11L18 14" stroke="#B37679" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Labels -->
+                <span style="position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.4);color:white;padding:3px 10px;border-radius:999px;font-size:10px;font-family:Jost,sans-serif;letter-spacing:0.15em;text-transform:uppercase;pointer-events:none;">Prima</span>
+                <span style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.4);color:white;padding:3px 10px;border-radius:999px;font-size:10px;font-family:Jost,sans-serif;letter-spacing:0.15em;text-transform:uppercase;pointer-events:none;">Dopo</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONVENZIONI ─── -->
+<section id="convenzioni" class="py-28 text-white" style="background-image:url('conv.png');background-size:cover;background-position:center;position:relative;">
+    <div class="absolute inset-0" style="background:rgba(28,27,27,0.72);"></div>
+    <div class="container mx-auto px-8 md:px-12 max-w-screen-xl relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+                <span class="text-xs font-body tracking-[0.4em] uppercase text-primary-fixed-dim mb-4 block">Collaborazioni</span>
+                <h2 class="text-5xl font-headline mb-6 leading-tight">Proposta di Convenzione</h2>
+                <div class="w-12 h-px bg-primary-fixed-dim mb-8"></div>
+                <p class="text-lg text-white/65 mb-10 leading-relaxed">Diva Estetica Avanzata propone collaborazioni e convenzioni dedicate ad Aziende, Enti, Palestre e Associazioni.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                    <div>
+                        <h4 class="text-primary-fixed-dim text-lg font-headline mb-5">Vantaggi per i convenzionati</h4>
+                        <ul class="space-y-4 text-white/75">
+                            <li class="flex items-start gap-3 text-sm">
+                                <span class="material-symbols-outlined text-primary-fixed-dim text-base mt-0.5">check_circle</span>
+                                Sconti esclusivi su trattamenti e pacchetti
+                            </li>
+                            <li class="flex items-start gap-3 text-sm">
+                                <span class="material-symbols-outlined text-primary-fixed-dim text-base mt-0.5">check_circle</span>
+                                Promozioni dedicate durante tutto l'anno
+                            </li>
+                            <li class="flex items-start gap-3 text-sm">
+                                <span class="material-symbols-outlined text-primary-fixed-dim text-base mt-0.5">check_circle</span>
+                                Priorità nelle prenotazioni
+                            </li>
+                            <li class="flex items-start gap-3 text-sm">
+                                <span class="material-symbols-outlined text-primary-fixed-dim text-base mt-0.5">check_circle</span>
+                                Eventi e open day riservati
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-primary-fixed-dim text-lg font-headline mb-5">Perché sceglierci</h4>
+                        <p class="text-sm text-white/55 leading-relaxed">Investire nel benessere del proprio team migliora la produttività. La nostra struttura offre flessibilità, riservatezza assoluta e un ambiente che favorisce il recupero psico-fisico completo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="bg-white/8 border border-white/10 p-10 rounded-2xl backdrop-blur-sm">
+                <h3 class="text-2xl font-headline mb-2">Richiedi una Convenzione</h3>
+                <p class="text-white/50 text-sm mb-8">Ti ricontatteremo entro 24 ore.</p>
+                <form class="space-y-7">
+                    <div>
+                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Nome Azienda / Ente</label>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" placeholder="es. Palestra Roma Sport"/>
+                    </div>
+                    <div>
+                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Referente</label>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" placeholder="Nome e Cognome"/>
+                    </div>
+                    <div>
+                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Email Referente</label>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="email" placeholder="email@azienda.it"/>
+                    </div>
+                    <div>
+                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Telefono</label>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="tel" placeholder="+39 000 000 0000"/>
+                    </div>
+                    <button class="w-full bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs mt-4 hover:opacity-90 transition-opacity duration-300">
+                        Invia Richiesta
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONTATTI ─── -->
+<section id="contatti" class="py-28 bg-surface">
+    <div class="container mx-auto px-8 md:px-12 max-w-screen-xl">
+
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <span class="text-xs font-body tracking-[0.4em] uppercase text-primary mb-4 block">Vieni a Trovarci</span>
+            <h2 class="text-5xl font-headline mb-4">Dove Siamo</h2>
+            <div class="w-12 h-px bg-primary mx-auto"></div>
+        </div>
+
+        <!-- Grid principale -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+
+            <!-- Indirizzo -->
+            <div class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10 flex flex-col gap-4">
+                <div class="flex items-center gap-3 mb-1">
+                    <span class="material-symbols-outlined text-primary">location_on</span>
+                    <h3 class="font-headline text-lg text-on-surface">Indirizzo</h3>
+                </div>
+                <div class="w-full h-px bg-outline-variant/20"></div>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Via Flavio Stilicone 80/82<br/>Roma</p>
+                <a href="https://maps.google.com/?q=Via+Flavio+Stilicone+80+Roma" target="_blank"
+                   class="inline-flex items-center gap-2 mt-auto text-xs uppercase tracking-widest font-semibold text-primary hover:text-primary/70 transition-colors">
+                    Apri in Maps
+                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+            </div>
+
+            <!-- Contatti -->
+            <div class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10 flex flex-col gap-4">
+                <div class="flex items-center gap-3 mb-1">
+                    <span class="material-symbols-outlined text-primary">call</span>
+                    <h3 class="font-headline text-lg text-on-surface">Contatti</h3>
+                </div>
+                <div class="w-full h-px bg-outline-variant/20"></div>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-outline mb-1">Telefono</p>
+                        <a href="tel:3247756159" class="text-on-surface font-semibold text-sm hover:text-primary transition-colors">324 775 6159</a>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-outline mb-1">Email</p>
+                        <a href="mailto:coccinelle.roma@gmail.com" class="text-on-surface font-semibold text-sm hover:text-primary transition-colors break-all">coccinelle.roma@gmail.com</a>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-outline mb-1">Instagram</p>
+                        <a href="https://www.instagram.com/diva.estetica.avanzata" target="_blank" class="text-on-surface font-semibold text-sm hover:text-primary transition-colors">@diva.estetica.avanzata</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orari -->
+            <div class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10 flex flex-col gap-4">
+                <div class="flex items-center gap-3 mb-1">
+                    <span class="material-symbols-outlined text-primary">schedule</span>
+                    <h3 class="font-headline text-lg text-on-surface">Orari</h3>
+                </div>
+                <div class="w-full h-px bg-outline-variant/20"></div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-on-surface-variant">Lunedì – Venerdì</span>
+                        <span class="font-semibold text-on-surface">9:00 – 19:00</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-on-surface-variant">Sabato</span>
+                        <span class="font-semibold text-on-surface">9:00 – 17:00</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-on-surface-variant">Domenica</span>
+                        <span class="text-outline">Chiuso</span>
+                    </div>
+                </div>
+                <a href="tel:3247756159" class="mt-auto bg-primary text-white text-xs font-semibold uppercase tracking-widest px-6 py-3 rounded-xl text-center hover:bg-primary/90 transition-colors">
+                    Prenota Ora
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Mappa -->
+        <div class="rounded-2xl overflow-hidden editorial-shadow" style="height:320px;">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.5!2d12.5074!3d41.8719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVia+Flavio+Stilicone+80%2C+Roma!5e0!3m2!1sit!2sit!4v1"
+                width="100%" height="320" style="border:0;display:block;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+
+    </div>
+</section>
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer class="bg-on-surface py-10 px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center max-w-screen-xl mx-auto gap-6">
+        <div class="flex flex-col items-center md:items-start gap-3">
+            <img src="logo.png" alt="Diva Estetica Avanzata" class="h-12 w-auto object-contain"/>
+            <p class="text-white/40 font-body text-xs tracking-wide">© 2025 Diva Estetica Avanzata · L'Atelier della Bellezza · Roma</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8">
+            <a class="text-white/40 transition-colors font-body text-xs tracking-wide hover:text-primary-fixed-dim" href="#">Privacy Policy</a>
+            <a class="text-white/40 transition-colors font-body text-xs tracking-wide hover:text-primary-fixed-dim" href="#">Termini e Condizioni</a>
+            <a class="text-white/40 transition-colors font-body text-xs tracking-wide hover:text-primary-fixed-dim" href="#">Lavora con noi</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    var wrap  = document.getElementById('ba-compare');
+    var prima = document.getElementById('ba-prima');
+    var line  = document.getElementById('ba-line');
+    if (!wrap) return;
+
+    var pct = 50;
+
+    function update(x) {
+        var rect = wrap.getBoundingClientRect();
+        pct = Math.min(100, Math.max(0, ((x - rect.left) / rect.width) * 100));
+        prima.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+        line.style.left = pct + '%';
+    }
+
+    var active = false;
+    wrap.addEventListener('mousedown',  function (e) { active = true; update(e.clientX); });
+    document.addEventListener('mouseup',   function ()  { active = false; });
+    document.addEventListener('mousemove', function (e) { if (active) update(e.clientX); });
+
+    wrap.addEventListener('touchstart', function (e) { active = true; update(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('touchend',   function ()  { active = false; });
+    document.addEventListener('touchmove',  function (e) { if (active) update(e.touches[0].clientX); }, { passive: true });
+
+    // demo animation on first view
+    var demoDone = false;
+    function runDemo() {
+        if (demoDone) return;
+        demoDone = true;
+        var steps = [
+            { p: 50,  t: 0    },
+            { p: 72,  t: 600  },
+            { p: 28,  t: 1400 },
+            { p: 50,  t: 2200 }
+        ];
+        steps.forEach(function (s) {
+            setTimeout(function () {
+                prima.style.transition = 'clip-path 0.55s ease-in-out';
+                line.style.transition  = 'left 0.55s ease-in-out';
+                pct = s.p;
+                prima.style.clipPath = 'inset(0 ' + (100 - s.p) + '% 0 0)';
+                line.style.left = s.p + '%';
+            }, s.t);
+        });
+        setTimeout(function () {
+            prima.style.transition = '';
+            line.style.transition  = '';
+        }, 2900);
+    }
+
+    var obs = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { setTimeout(runDemo, 400); obs.disconnect(); }
+    }, { threshold: 0.5 });
+    obs.observe(wrap);
+})();
+</script>
+</body></html>
