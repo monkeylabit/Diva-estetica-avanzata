@@ -166,41 +166,7 @@
     body {
         overflow-x: hidden;
     }
-    /* ── 3D rotating carousel ── */
-    .scene, .a3d { display: grid; }
-    .scene {
-        overflow: hidden;
-        perspective: 45em;
-        -webkit-mask: linear-gradient(90deg, #0000, red 15% 85%, #0000);
-        mask: linear-gradient(90deg, #0000, red 15% 85%, #0000);
-        height: 32em;
-        width: 100%;
-        margin: 2.5rem 0 1rem;
-    }
-    .a3d {
-        place-self: center;
-        transform-style: preserve-3d;
-        animation: ry 32s linear infinite;
-    }
-    .a3d:hover { animation-play-state: paused; }
-    @keyframes ry { to { rotate: y 1turn; } }
-    .card {
-        --w: 15em;
-        --ba: 1turn / var(--n);
-        grid-area: 1 / 1;
-        width: var(--w);
-        aspect-ratio: 7 / 10;
-        object-fit: cover;
-        border-radius: 1.5em;
-        backface-visibility: hidden;
-        box-shadow: 0 8px 40px rgba(28,27,27,0.22);
-        transform:
-            rotatey(calc(var(--i) * var(--ba)))
-            translatez(calc(-1 * (.5 * var(--w) + .5em) / tan(.5 * var(--ba))));
-    }
-    @media (prefers-reduced-motion: reduce) { .a3d { animation-duration: 128s; } }
-    #ba-slider::-webkit-scrollbar { display: none; }
-    #ba-slider.grabbing { cursor: grabbing; }
+    #rc-track .rc-item { flex-shrink: 0; }
     body {
         font-weight: 400;
         -webkit-font-smoothing: antialiased;
@@ -424,20 +390,29 @@
         <p class="text-on-surface-variant text-sm leading-relaxed max-w-md mx-auto mt-2">Risultati reali, su clienti reali.</p>
     </div>
 
-    <!-- 3D rotating carousel -->
-    <div class="scene">
-        <div class="a3d" style="--n:10">
-            <img class="card" loading="lazy" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" style="--i:0" alt="Trasformazione 1"/>
-            <img class="card" loading="lazy" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" style="--i:1" alt="Trasformazione 2"/>
-            <img class="card" loading="lazy" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" style="--i:2" alt="Trasformazione 3"/>
-            <div class="card" style="--i:3;background:url('nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg') center 35% / 155% 155% no-repeat;"></div>
-            <img class="card" loading="lazy" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" style="--i:4" alt="Trasformazione 5"/>
-            <img class="card" loading="lazy" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" style="--i:5" alt="Trasformazione 6"/>
-            <img class="card" loading="lazy" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" style="--i:6" alt="Trasformazione 7"/>
-            <img class="card" loading="lazy" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" style="--i:7" alt="Trasformazione 8"/>
-            <img class="card" loading="lazy" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" style="--i:8" alt="Trasformazione 9"/>
-            <img class="card" loading="lazy" src="nostri%20risultati/centro.jpg"                                              style="--i:9" alt="Trasformazione 10"/>
+    <!-- Flat carousel -->
+    <div class="relative mt-10 mb-2 px-8 md:px-12 max-w-screen-xl mx-auto" id="risultati-carousel">
+      <button id="rc-prev" aria-label="Precedente" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center bg-white rounded-full editorial-shadow hover:bg-surface-container transition-colors" style="margin-top:-20px;">
+        <span class="material-symbols-outlined text-on-surface" style="font-size:22px;">chevron_left</span>
+      </button>
+      <div class="overflow-hidden mx-6" id="rc-viewport">
+        <div id="rc-track" class="flex" style="will-change:transform;">
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" alt="Trasformazione 1"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" alt="Trasformazione 2"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" alt="Trasformazione 3"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center 35%;" loading="lazy" src="nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg" alt="Trasformazione 4"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" alt="Trasformazione 5"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" alt="Trasformazione 6"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" alt="Trasformazione 7"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" alt="Trasformazione 8"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" alt="Trasformazione 9"/></div>
+          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/centro.jpg" alt="Trasformazione 10"/></div>
         </div>
+      </div>
+      <button id="rc-next" aria-label="Successiva" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center bg-white rounded-full editorial-shadow hover:bg-surface-container transition-colors" style="margin-top:-20px;">
+        <span class="material-symbols-outlined text-on-surface" style="font-size:22px;">chevron_right</span>
+      </button>
+      <div id="rc-dots" class="flex justify-center gap-2 mt-6"></div>
     </div>
 
     <!-- CTA -->
@@ -690,6 +665,59 @@
     </div>
 </footer>
 
+<script>
+(function(){
+  var track=document.getElementById('rc-track');
+  var vp=document.getElementById('rc-viewport');
+  var prev=document.getElementById('rc-prev');
+  var next=document.getElementById('rc-next');
+  var dotsEl=document.getElementById('rc-dots');
+  if(!track)return;
+  var items=Array.from(track.querySelectorAll('.rc-item'));
+  var n=items.length;
+  var cur=0;
+  var timer;
+  function vis(){return window.innerWidth>=1024?3:window.innerWidth>=640?2:1;}
+  function cardW(){return vp.offsetWidth/vis();}
+  function maxIdx(){return Math.max(0,n-vis());}
+  function go(idx,animate){
+    cur=Math.max(0,Math.min(idx,maxIdx()));
+    var cw=cardW();
+    items.forEach(function(el){el.style.width=cw+'px';});
+    track.style.transition=animate===false?'none':'transform 0.5s cubic-bezier(.4,0,.2,1)';
+    track.style.transform='translateX(-'+(cur*cw)+'px)';
+    renderDots();
+    prev.style.opacity=cur===0?'0.35':'1';
+    next.style.opacity=cur>=maxIdx()?'0.35':'1';
+  }
+  function renderDots(){
+    var mx=maxIdx();
+    if(dotsEl.children.length!==mx+1){
+      dotsEl.innerHTML='';
+      for(var i=0;i<=mx;i++){
+        var b=document.createElement('button');
+        b.style.cssText='width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:background 0.3s;outline:none;';
+        (function(ii){b.addEventListener('click',function(){go(ii);restart();});})(i);
+        dotsEl.appendChild(b);
+      }
+    }
+    Array.from(dotsEl.children).forEach(function(d,i){d.style.background=i===cur?'#B37679':'#d6c2c2';});
+  }
+  prev.addEventListener('click',function(){go(cur-1);restart();});
+  next.addEventListener('click',function(){go(cur+1);restart();});
+  function tick(){go(cur>=maxIdx()?0:cur+1);}
+  function start(){timer=setInterval(tick,4000);}
+  function restart(){clearInterval(timer);start();}
+  vp.addEventListener('mouseenter',function(){clearInterval(timer);});
+  vp.addEventListener('mouseleave',start);
+  var tx0;
+  track.addEventListener('touchstart',function(e){tx0=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx0;if(Math.abs(dx)>40){go(dx<0?cur+1:cur-1);restart();}});
+  window.addEventListener('resize',function(){go(cur,false);});
+  go(0,false);
+  start();
+})();
+</script>
 <script>
 (function () {
     var wrap  = document.getElementById('ba-compare');
