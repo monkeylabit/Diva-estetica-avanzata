@@ -27,10 +27,11 @@
 <meta name="twitter:title" content="Diva Estetica Avanzata — Roma"/>
 <meta name="twitter:description" content="Centro specializzato in trattamenti estetici innovativi a Roma."/>
 <meta name="twitter:image" content="https://diva-estetica-avanzata.vercel.app/logo%20alto.png"/>
+<link rel="preload" as="image" href="sfondohero.jpg"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Jost:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
     tailwind.config = {
@@ -237,7 +238,7 @@
 <!-- ─── HERO ─── -->
 <section class="relative min-h-[92vh] flex items-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img class="w-full h-full object-cover" src="sfondohero.jpg" alt="Diva Estetica Avanzata"/>
+        <img class="w-full h-full object-cover" src="sfondohero.jpg" alt="Diva Estetica Avanzata" fetchpriority="high" decoding="async"/>
         <!-- overlay scuro sul lato sinistro per leggibilità del testo, lascia destra visibile -->
         <div class="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-black/10"></div>
     </div>
@@ -269,7 +270,7 @@
 <section id="chi-siamo" class="pb-10 pt-16 bg-surface">
     <div class="container mx-auto px-8 md:px-12 max-w-screen-xl">
         <div class="max-w-2xl mx-auto text-center">
-            <img src="logo%20alto.png" alt="Diva Estetica Avanzata" class="h-20 w-auto object-contain mx-auto mb-6"/>
+            <img src="logo%20alto.png" alt="Diva Estetica Avanzata" class="h-20 w-auto object-contain mx-auto mb-6" loading="lazy"/>
             <span class="text-xs font-body tracking-[0.4em] uppercase text-primary mb-4 block">Eredità e Passione</span>
             <h2 class="text-5xl font-headline mb-6 leading-tight">Chi Siamo</h2>
             <div class="w-12 h-px bg-primary mb-8 mx-auto"></div>
@@ -310,7 +311,7 @@
 
             <!-- 01 Viso — 2 colonne -->
             <div class="lg:col-span-2 rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
-                <img src="servizi/28875c8f2462450fb89a8cf0c20a9117.png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <img src="servizi/28875c8f2462450fb89a8cf0c20a9117.jpg" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
                 <div class="relative z-10 flex justify-between items-start">
                     <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">face_retouching_natural</span>
@@ -325,7 +326,7 @@
 
             <!-- 02 Epilazione Laser -->
             <div class="rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
-                <img src="servizi/Gemini_Generated_Image_uz4ls8uz4ls8uz4l%20(1).png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <img src="servizi/Gemini_Generated_Image_uz4ls8uz4ls8uz4l%20(1).jpg" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
                 <div class="relative z-10 flex justify-between items-start">
                     <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">bolt</span>
@@ -340,7 +341,7 @@
 
             <!-- 03 Corpo -->
             <div class="rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
-                <img src="servizi/bce6a66e2b884426a4d2c23529c87760.png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <img src="servizi/bce6a66e2b884426a4d2c23529c87760.jpg" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
                 <div class="relative z-10 flex justify-between items-start">
                     <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">accessibility_new</span>
@@ -355,7 +356,7 @@
 
             <!-- 04 Massaggi -->
             <div class="rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
-                <img src="servizi/cb5b335f5e8c462da2a1b75ee3c8611c.png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <img src="servizi/cb5b335f5e8c462da2a1b75ee3c8611c.jpg" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
                 <div class="relative z-10 flex justify-between items-start">
                     <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">spa</span>
@@ -373,7 +374,7 @@
 
             <!-- 05 Hyaluron Pen — 2 colonne -->
             <div class="lg:col-span-2 rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
-                <img src="servizi/d968749b26864d75a23e84e6a82c2967.png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <img src="servizi/d968749b26864d75a23e84e6a82c2967.jpg" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
                 <div class="relative z-10 flex justify-between items-start">
                     <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">water_drop</span>
@@ -391,7 +392,7 @@
 
             <!-- 06 Consulenza & Nutrizione -->
             <div class="rounded-2xl group relative overflow-hidden flex flex-col justify-between p-8 hover:-translate-y-1 transition-transform duration-300 cursor-default">
-                <img src="servizi/Gemini_Generated_Image_zbpxlnzbpxlnzbpx%20(1).png" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                <img src="servizi/Gemini_Generated_Image_zbpxlnzbpxlnzbpx%20(1).jpg" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"></div>
                 <div class="relative z-10 flex justify-between items-start">
                     <span class="material-symbols-outlined text-3xl text-white/80 group-hover:scale-110 transition-transform duration-300">person_search</span>
@@ -422,16 +423,16 @@
     <!-- 3D rotating carousel -->
     <div class="scene">
         <div class="a3d" style="--n:10">
-            <img class="card" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" style="--i:0" alt="Trasformazione 1"/>
-            <img class="card" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" style="--i:1" alt="Trasformazione 2"/>
-            <img class="card" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" style="--i:2" alt="Trasformazione 3"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" style="--i:0" alt="Trasformazione 1"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" style="--i:1" alt="Trasformazione 2"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" style="--i:2" alt="Trasformazione 3"/>
             <div class="card" style="--i:3;background:url('nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg') center 35% / 155% 155% no-repeat;"></div>
-            <img class="card" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" style="--i:4" alt="Trasformazione 5"/>
-            <img class="card" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" style="--i:5" alt="Trasformazione 6"/>
-            <img class="card" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" style="--i:6" alt="Trasformazione 7"/>
-            <img class="card" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" style="--i:7" alt="Trasformazione 8"/>
-            <img class="card" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" style="--i:8" alt="Trasformazione 9"/>
-            <img class="card" src="nostri%20risultati/centro.jpg"                                              style="--i:9" alt="Trasformazione 10"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" style="--i:4" alt="Trasformazione 5"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" style="--i:5" alt="Trasformazione 6"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" style="--i:6" alt="Trasformazione 7"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" style="--i:7" alt="Trasformazione 8"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" style="--i:8" alt="Trasformazione 9"/>
+            <img class="card" loading="lazy" src="nostri%20risultati/centro.jpg"                                              style="--i:9" alt="Trasformazione 10"/>
         </div>
     </div>
 
@@ -485,9 +486,9 @@
             <!-- Right side: prima/dopo comparison slider -->
             <div id="ba-compare" class="editorial-shadow" style="position:relative;overflow:hidden;border-radius:1rem;cursor:ew-resize;user-select:none;touch-action:pan-y;">
                 <!-- Dopo — base layer -->
-                <img src="prima%20e%20dopo/dopo.jpg" style="display:block;width:100%;height:auto;" draggable="false" alt="Dopo"/>
+                <img src="prima%20e%20dopo/dopo.jpg" style="display:block;width:100%;height:auto;" draggable="false" alt="Dopo" loading="lazy"/>
                 <!-- Prima — clipped on right -->
-                <img id="ba-prima" src="prima%20e%20dopo/467428947_17916254823001823_8733858831901528883_n.jpg"
+                <img id="ba-prima" src="prima%20e%20dopo/467428947_17916254823001823_8733858831901528883_n.jpg" loading="lazy"
                      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 50% 0 0);"
                      draggable="false" alt="Prima"/>
                 <!-- Divider line -->
@@ -508,7 +509,7 @@
 </section>
 
 <!-- ─── CONVENZIONI ─── -->
-<section id="convenzioni" class="py-28 text-white" style="background-image:url('conv.png');background-size:cover;background-position:center;position:relative;">
+<section id="convenzioni" class="py-28 text-white" style="background-image:url('conv.jpg');background-size:cover;background-position:center;position:relative;">
     <div class="absolute inset-0" style="background:rgba(28,27,27,0.72);"></div>
     <div class="container mx-auto px-8 md:px-12 max-w-screen-xl relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -661,7 +662,7 @@
         <div class="rounded-2xl overflow-hidden editorial-shadow" style="height:320px;">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.5!2d12.5074!3d41.8719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVia+Flavio+Stilicone+80%2C+Roma!5e0!3m2!1sit!2sit!4v1"
-                width="100%" height="320" style="border:0;display:block;" allowfullscreen="" loading="lazy">
+                width="100%" height="320" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </div>
 
@@ -673,7 +674,7 @@
 <footer class="bg-on-surface py-10 px-8">
     <div class="flex flex-col md:flex-row justify-between items-center max-w-screen-xl mx-auto gap-6">
         <div class="flex flex-col items-center md:items-start gap-3">
-            <img src="logo.png" alt="Diva Estetica Avanzata" class="h-12 w-auto object-contain"/>
+            <img src="logo.png" alt="Diva Estetica Avanzata" class="h-12 w-auto object-contain" loading="lazy"/>
             <p class="text-white/40 font-body text-xs tracking-wide">© 2025 Diva Estetica Avanzata · L'Atelier della Bellezza · Roma</p>
         </div>
         <div class="flex flex-wrap justify-center gap-8">
