@@ -166,7 +166,29 @@
     body {
         overflow-x: hidden;
     }
-    #rc-track .rc-item { flex-shrink: 0; }
+    /* ── Infinite marquee ── */
+    @keyframes mq-left  { to   { transform: translateX(-50%); } }
+    @keyframes mq-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    .mq-outer {
+        overflow: hidden;
+        -webkit-mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+        mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    }
+    .mq-row { display: flex; width: max-content; gap: 14px; padding: 8px 0; }
+    .mq-left  { animation: mq-left  40s linear infinite; }
+    .mq-right { animation: mq-right 32s linear infinite; }
+    .mq-outer:hover .mq-left,
+    .mq-outer:hover .mq-right { animation-play-state: paused; }
+    .mq-img {
+        height: 17rem;
+        width: auto;
+        border-radius: 1rem;
+        object-fit: cover;
+        display: block;
+        box-shadow: 0 6px 30px rgba(28,27,27,0.14);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .mq-img:hover { transform: scale(1.04); box-shadow: 0 14px 50px rgba(28,27,27,0.26); }
     body {
         font-weight: 400;
         -webkit-font-smoothing: antialiased;
@@ -390,29 +412,63 @@
         <p class="text-on-surface-variant text-sm leading-relaxed max-w-md mx-auto mt-2">Risultati reali, su clienti reali.</p>
     </div>
 
-    <!-- Flat carousel -->
-    <div class="relative mt-10 mb-2 px-8 md:px-12 max-w-screen-xl mx-auto" id="risultati-carousel">
-      <button id="rc-prev" aria-label="Precedente" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center bg-white rounded-full editorial-shadow hover:bg-surface-container transition-colors" style="margin-top:-20px;">
-        <span class="material-symbols-outlined text-on-surface" style="font-size:22px;">chevron_left</span>
-      </button>
-      <div class="overflow-hidden mx-6" id="rc-viewport">
-        <div id="rc-track" class="flex" style="will-change:transform;">
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" alt="Trasformazione 1"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" alt="Trasformazione 2"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" alt="Trasformazione 3"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center 35%;" loading="lazy" src="nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg" alt="Trasformazione 4"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" alt="Trasformazione 5"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" alt="Trasformazione 6"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" alt="Trasformazione 7"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" alt="Trasformazione 8"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" alt="Trasformazione 9"/></div>
-          <div class="rc-item px-2"><img class="w-full object-cover rounded-2xl editorial-shadow" style="height:22rem;object-position:center;" loading="lazy" src="nostri%20risultati/centro.jpg" alt="Trasformazione 10"/></div>
+    <!-- Infinite marquee — row 1 left, row 2 right -->
+    <div class="mt-10 mb-2 space-y-4">
+
+      <!-- Row 1 → left -->
+      <div class="mq-outer">
+        <div class="mq-row mq-left" aria-hidden="true">
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg" alt="" style="object-position:center 35%;"/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/centro.jpg" alt=""/>
+          <!-- duplicate for seamless loop -->
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg" alt="" style="object-position:center 35%;"/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/centro.jpg" alt=""/>
         </div>
       </div>
-      <button id="rc-next" aria-label="Successiva" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center bg-white rounded-full editorial-shadow hover:bg-surface-container transition-colors" style="margin-top:-20px;">
-        <span class="material-symbols-outlined text-on-surface" style="font-size:22px;">chevron_right</span>
-      </button>
-      <div id="rc-dots" class="flex justify-center gap-2 mt-6"></div>
+
+      <!-- Row 2 ← right (staggered order) -->
+      <div class="mq-outer">
+        <div class="mq-row mq-right" aria-hidden="true">
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/centro.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg" alt="" style="object-position:center 35%;"/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" alt=""/>
+          <!-- duplicate for seamless loop -->
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/523561762_17944183179001823_2467653829845429505_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/526350054_17944553277001823_5253189692407728561_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/553110594_17950770918001823_1440065753473458849_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/520531796_17943077970001823_4951039754237320915_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/542367407_17948621787001823_6196850841174396250_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/centro.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/523550801_17944004160001823_4054994548722179830_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/521792236_17943862752001823_6646973721334716555_n.jpg" alt=""/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/522148644_17943505845001823_3285477373239434452_n.jpg" alt="" style="object-position:center 35%;"/>
+          <img class="mq-img" loading="lazy" src="nostri%20risultati/521404910_17942994153001823_1838484729222992786_n.jpg" alt=""/>
+        </div>
+      </div>
+
     </div>
 
     <!-- CTA -->
@@ -665,59 +721,6 @@
     </div>
 </footer>
 
-<script>
-(function(){
-  var track=document.getElementById('rc-track');
-  var vp=document.getElementById('rc-viewport');
-  var prev=document.getElementById('rc-prev');
-  var next=document.getElementById('rc-next');
-  var dotsEl=document.getElementById('rc-dots');
-  if(!track)return;
-  var items=Array.from(track.querySelectorAll('.rc-item'));
-  var n=items.length;
-  var cur=0;
-  var timer;
-  function vis(){return window.innerWidth>=1024?3:window.innerWidth>=640?2:1;}
-  function cardW(){return vp.offsetWidth/vis();}
-  function maxIdx(){return Math.max(0,n-vis());}
-  function go(idx,animate){
-    cur=Math.max(0,Math.min(idx,maxIdx()));
-    var cw=cardW();
-    items.forEach(function(el){el.style.width=cw+'px';});
-    track.style.transition=animate===false?'none':'transform 0.5s cubic-bezier(.4,0,.2,1)';
-    track.style.transform='translateX(-'+(cur*cw)+'px)';
-    renderDots();
-    prev.style.opacity=cur===0?'0.35':'1';
-    next.style.opacity=cur>=maxIdx()?'0.35':'1';
-  }
-  function renderDots(){
-    var mx=maxIdx();
-    if(dotsEl.children.length!==mx+1){
-      dotsEl.innerHTML='';
-      for(var i=0;i<=mx;i++){
-        var b=document.createElement('button');
-        b.style.cssText='width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:background 0.3s;outline:none;';
-        (function(ii){b.addEventListener('click',function(){go(ii);restart();});})(i);
-        dotsEl.appendChild(b);
-      }
-    }
-    Array.from(dotsEl.children).forEach(function(d,i){d.style.background=i===cur?'#B37679':'#d6c2c2';});
-  }
-  prev.addEventListener('click',function(){go(cur-1);restart();});
-  next.addEventListener('click',function(){go(cur+1);restart();});
-  function tick(){go(cur>=maxIdx()?0:cur+1);}
-  function start(){timer=setInterval(tick,4000);}
-  function restart(){clearInterval(timer);start();}
-  vp.addEventListener('mouseenter',function(){clearInterval(timer);});
-  vp.addEventListener('mouseleave',start);
-  var tx0;
-  track.addEventListener('touchstart',function(e){tx0=e.touches[0].clientX;},{passive:true});
-  track.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx0;if(Math.abs(dx)>40){go(dx<0?cur+1:cur-1);restart();}});
-  window.addEventListener('resize',function(){go(cur,false);});
-  go(0,false);
-  start();
-})();
-</script>
 <script>
 (function () {
     var wrap  = document.getElementById('ba-compare');
