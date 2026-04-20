@@ -18,7 +18,7 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#B37679","pr
   .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;vertical-align:middle;}
   .editorial-shadow{box-shadow:0 20px 60px rgba(28,27,27,0.10);}
   .soft-shadow{box-shadow:0 4px 24px rgba(28,27,27,0.06);}
-  .nav-link{position:relative;}.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#B37679;transition:width 0.3s ease;}.nav-link:hover::after{width:100%;}
+  .btn-glass-back{display:inline-flex;align-items:center;gap:6px;padding:6px 14px 6px 10px;border-radius:999px;background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.92);transition:background 0.3s,border-color 0.3s;margin-bottom:1.5rem;text-decoration:none;}.btn-glass-back:hover{background:rgba(255,255,255,0.22);border-color:rgba(255,255,255,0.45);}.nav-link{position:relative;}.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#B37679;transition:width 0.3s ease;}.nav-link:hover::after{width:100%;}
   html{scroll-behavior:smooth;overflow-x:clip;}body{overflow-x:hidden;font-weight:400;-webkit-font-smoothing:antialiased;.
 </style>
 </head>
@@ -43,7 +43,7 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#B37679","pr
   <img src="servizi/Gemini_Generated_Image_uz4ls8uz4ls8uz4l%20(1).jpg" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover" alt="Epilazione Laser"/>
   <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/45 to-black/10"></div>
   <div class="relative z-10 container mx-auto px-8 md:px-12 max-w-screen-xl pb-14 pt-10">
-    <a href="index.html#servizi" class="inline-flex items-center gap-2 text-white/60 hover:text-white text-xs uppercase tracking-widest font-semibold mb-6 transition-colors">
+    <a href="index.html#servizi" class="btn-glass-back">
       <span class="material-symbols-outlined text-sm">arrow_back</span> Tutti i Servizi
     </a>
     <span class="text-xs font-body tracking-[0.4em] uppercase text-primary-fixed-dim mb-3 block">Percorsi di Benessere</span>
