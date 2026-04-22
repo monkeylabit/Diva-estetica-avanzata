@@ -421,13 +421,47 @@
 </section>
 
 <!-- ─── RISULTATI ─── -->
-<section id="risultati" class="bg-surface overflow-hidden">
-    <div class="grid grid-cols-2 gap-1">
-      <img loading="lazy" src="trasform/PHOTO-2026-04-21-12-19-01.JPG" alt="Trasformazione" class="w-full h-32 md:h-52 object-cover"/>
-      <img loading="lazy" src="trasform/8A87A173-88A5-4D04-AFEA-B97823FDBF79.JPEG" alt="Trasformazione" class="w-full h-32 md:h-52 object-cover"/>
-      <img loading="lazy" src="trasform/A80C2E66-099F-4F5F-B9FD-BE429F1E199B.JPEG" alt="Trasformazione" class="w-full h-32 md:h-52 object-cover"/>
-      <img loading="lazy" src="trasform/131D3DED-157B-4575-9BBB-20F043228297.JPEG" alt="Trasformazione" class="w-full h-32 md:h-52 object-cover"/>
+<section id="risultati" class="bg-surface py-10 overflow-hidden">
+  <div id="carousel" style="position:relative;padding:0 16px;overflow:hidden;">
+    <div id="carousel-track" style="display:flex;gap:12px;transition:transform 0.5s cubic-bezier(.4,0,.2,1);">
+      <div style="min-width:calc(50% - 6px);flex-shrink:0;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(28,27,27,0.10);">
+        <img src="trasform/PHOTO-2026-04-21-12-19-01.JPG" alt="Trasformazione" style="width:100%;height:420px;object-fit:cover;display:block;" loading="lazy"/>
+      </div>
+      <div style="min-width:calc(50% - 6px);flex-shrink:0;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(28,27,27,0.10);">
+        <img src="trasform/8A87A173-88A5-4D04-AFEA-B97823FDBF79.JPEG" alt="Trasformazione" style="width:100%;height:420px;object-fit:cover;display:block;" loading="lazy"/>
+      </div>
+      <div style="min-width:calc(50% - 6px);flex-shrink:0;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(28,27,27,0.10);">
+        <img src="trasform/A80C2E66-099F-4F5F-B9FD-BE429F1E199B.JPEG" alt="Trasformazione" style="width:100%;height:420px;object-fit:cover;display:block;" loading="lazy"/>
+      </div>
+      <div style="min-width:calc(50% - 6px);flex-shrink:0;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(28,27,27,0.10);">
+        <img src="trasform/131D3DED-157B-4575-9BBB-20F043228297.JPEG" alt="Trasformazione" style="width:100%;height:420px;object-fit:cover;display:block;" loading="lazy"/>
+      </div>
     </div>
+    <!-- Dots -->
+    <div id="carousel-dots" style="display:flex;justify-content:center;gap:7px;margin-top:16px;">
+      <button onclick="cGoTo(0)" style="width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:1;transition:opacity .3s;"></button>
+      <button onclick="cGoTo(1)" style="width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:0.3;transition:opacity .3s;"></button>
+      <button onclick="cGoTo(2)" style="width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:0.3;transition:opacity .3s;"></button>
+    </div>
+  </div>
+  <script>(function(){
+    var track=document.getElementById('carousel-track'),
+        dots=document.getElementById('carousel-dots').querySelectorAll('button'),
+        cur=0,n=3,timer,startX=0;
+    function cardW(){return track.children[0].offsetWidth+12;}
+    function cGoTo(i){cur=i;track.style.transform='translateX(-'+(cur*cardW())+'px)';dots.forEach(function(d,j){d.style.opacity=j===cur?'1':'0.3';});}
+    window.cGoTo=cGoTo;
+    function next(){cGoTo((cur+1)%n);}
+    timer=setInterval(next,3000);
+    var el=document.getElementById('carousel');
+    el.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;clearInterval(timer);},{passive:true});
+    el.addEventListener('touchend',function(e){
+      var dx=e.changedTouches[0].clientX-startX;
+      if(dx<-40)cGoTo((cur+1)%n);
+      else if(dx>40)cGoTo((cur-1+n)%n);
+      timer=setInterval(next,3000);
+    });
+  })();</script>
 </section>
 
 <!-- ─── TECNOLOGIE & PERCHÉ SCEGLIERCI ─── -->
@@ -468,9 +502,9 @@
             <!-- Right side: prima/dopo comparison slider -->
             <div id="ba-compare" class="editorial-shadow h-[260px] md:h-[420px]" style="position:relative;overflow:hidden;border-radius:1rem;cursor:ew-resize;user-select:none;touch-action:pan-y;">
                 <!-- Dopo — base layer -->
-                <img src="prima%20e%20dopo%20innovazione/28325A5C-8332-41A5-AA00-5335411B947B.jpeg" style="display:block;width:100%;height:100%;object-fit:cover;" draggable="false" alt="Dopo" loading="lazy"/>
+                <img src="prima%20e%20dopo%20innovazione/dopo.JPEG" style="display:block;width:100%;height:100%;object-fit:cover;" draggable="false" alt="Dopo" loading="lazy"/>
                 <!-- Prima — clipped on right -->
-                <img id="ba-prima" src="prima%20e%20dopo%20innovazione/9AC4165E-A3C8-4CB6-A673-7E5411DA9456.jpeg" loading="lazy"
+                <img id="ba-prima" src="prima%20e%20dopo%20innovazione/AAA9EB43-8817-4483-8049-456AEC3EA8C1.JPEG" loading="lazy"
                      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 50% 0 0);"
                      draggable="false" alt="Prima"/>
                 <!-- Divider line -->
