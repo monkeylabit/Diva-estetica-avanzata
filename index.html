@@ -422,7 +422,7 @@
 
 <!-- ─── RISULTATI ─── -->
 <section id="risultati" class="bg-surface py-8 overflow-hidden">
-  <style>.c-card{flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);min-width:calc(50% - 5px);}@media(min-width:640px){.c-card{min-width:calc(33.333% - 7px);}}.c-card img{width:100%;height:220px;object-fit:cover;display:block;}@media(min-width:640px){.c-card img{height:260px;}}</style>
+  <style>.c-card{flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);min-width:calc(100% - 40px);}@media(min-width:640px){.c-card{min-width:calc(33.333% - 7px);}}.c-card img{width:100%;height:340px;object-fit:cover;display:block;}@media(min-width:640px){.c-card img{height:280px;}}</style>
   <div id="carousel" style="position:relative;padding:0 16px;overflow:hidden;">
     <div id="carousel-track" style="display:flex;gap:10px;transition:transform 0.5s cubic-bezier(.4,0,.2,1);">
       <div class="c-card"><img src="trasform/131D3DED-157B-4575-9BBB-20F043228297.JPEG" alt="Trasformazione" loading="lazy"/></div>
@@ -437,7 +437,7 @@
     var track=document.getElementById('carousel-track'),
         dotsEl=document.getElementById('carousel-dots'),
         cur=0,timer,startX=0,n,dots;
-    function visible(){return window.innerWidth>=640?3:2;}
+    function visible(){return window.innerWidth>=640?3:1;}
     function total(){return 5;}
     function buildDots(){n=total()-visible()+1;dotsEl.innerHTML='';dots=[];for(var i=0;i<n;i++){var b=document.createElement('button');b.style.cssText='width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:'+(i===0?'1':'0.3')+';transition:opacity .3s;';b.setAttribute('data-i',i);b.onclick=(function(idx){return function(){cGoTo(idx);};})(i);dotsEl.appendChild(b);dots.push(b);}}
     function cardW(){return track.children[0].offsetWidth+10;}
