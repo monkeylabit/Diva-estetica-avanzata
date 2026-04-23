@@ -421,36 +421,21 @@
 </section>
 
 <!-- ─── RISULTATI ─── -->
-<section id="risultati" class="bg-surface py-8 overflow-hidden">
-  <style>.c-card{flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);min-width:64%;}@media(min-width:640px){.c-card{min-width:calc(33.333% - 7px);}}.c-card img{width:100%;height:420px;object-fit:cover;display:block;}@media(min-width:640px){.c-card img{height:280px;}}</style>
-  <div id="carousel" style="position:relative;padding:0 20px;overflow:hidden;">
-    <div id="carousel-track" style="display:flex;gap:10px;transition:transform 0.5s cubic-bezier(.4,0,.2,1);">
-      <div class="c-card"><img src="trasform/131D3DED-157B-4575-9BBB-20F043228297.JPEG" alt="Trasformazione" loading="lazy"/></div>
-      <div class="c-card"><img src="trasform/8A87A173-88A5-4D04-AFEA-B97823FDBF79.JPEG" alt="Trasformazione" loading="lazy"/></div>
-      <div class="c-card"><img src="trasform/A80C2E66-099F-4F5F-B9FD-BE429F1E199B.JPEG" alt="Trasformazione" loading="lazy"/></div>
-      <div class="c-card"><img src="trasform/CB4853A8-A34B-4A43-8F91-0ADB23E9A1F6.JPEG" alt="Trasformazione" loading="lazy"/></div>
-      <div class="c-card"><img src="trasform/FCB9EA68-4799-4AC3-BA2E-2B88ECE990FE.JPEG" alt="Trasformazione" loading="lazy"/></div>
-    </div>
-    <div id="carousel-dots" style="display:flex;justify-content:center;gap:7px;margin-top:16px;margin-bottom:4px;"></div>
+<section id="risultati" class="bg-surface py-8">
+  <style>
+    #tr-scroll{display:flex;gap:10px;padding:0 20px 0 20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;}#tr-scroll::after{content:'';flex-shrink:0;width:10px;}
+    #tr-scroll::-webkit-scrollbar{display:none;}
+    #tr-scroll img{scroll-snap-align:start;flex-shrink:0;width:160px;height:213px;object-fit:cover;border-radius:12px;box-shadow:0 4px 14px rgba(28,27,27,0.10);}
+    @media(min-width:640px){#tr-scroll img{width:200px;height:267px;}}
+  </style>
+  <div id="tr-scroll">
+    <img src="trasform/131D3DED-157B-4575-9BBB-20F043228297.JPEG" alt="Trasformazione" loading="lazy"/>
+    <img src="trasform/8A87A173-88A5-4D04-AFEA-B97823FDBF79.JPEG" alt="Trasformazione" loading="lazy"/>
+    <img src="trasform/A80C2E66-099F-4F5F-B9FD-BE429F1E199B.JPEG" alt="Trasformazione" loading="lazy"/>
+    <img src="trasform/CB4853A8-A34B-4A43-8F91-0ADB23E9A1F6.JPEG" alt="Trasformazione" loading="lazy"/>
+    <img src="trasform/FCB9EA68-4799-4AC3-BA2E-2B88ECE990FE.JPEG" alt="Trasformazione" loading="lazy"/>
   </div>
-  <script>(function(){
-    var track=document.getElementById('carousel-track'),
-        dotsEl=document.getElementById('carousel-dots'),
-        cur=0,timer,startX=0,n,dots;
-    function visible(){return window.innerWidth>=640?3:1;}
-    function buildDots(){n=5-visible()+1;dotsEl.innerHTML='';dots=[];for(var i=0;i<n;i++){var b=document.createElement('button');b.style.cssText='width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:'+(i===0?'1':'0.3')+';transition:opacity .3s;';b.onclick=(function(idx){return function(){cGoTo(idx);};})(i);dotsEl.appendChild(b);dots.push(b);}}
-    function cardW(){return track.children[0].offsetWidth+10;}
-    function cGoTo(i){cur=Math.max(0,Math.min(i,n-1));track.style.transform='translateX(-'+(cur*cardW())+'px)';dots.forEach(function(d,j){d.style.opacity=j===cur?'1':'0.3';});}
-    window.cGoTo=cGoTo;
-    function next(){cGoTo((cur+1)%n);}
-    buildDots();
-    timer=setInterval(next,3000);
-    window.addEventListener('resize',function(){clearInterval(timer);buildDots();cGoTo(0);timer=setInterval(next,3000);});
-    var el=document.getElementById('carousel');
-    el.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;clearInterval(timer);},{passive:true});
-    el.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-startX;if(dx<-40)cGoTo((cur+1)%n);else if(dx>40)cGoTo((cur-1+n)%n);timer=setInterval(next,3000);});
-  })();</script>
-  <div style="display:flex;justify-content:center;padding:14px 0 20px;">
+  <div style="display:flex;justify-content:center;padding:14px 0 4px;">
     <a href="https://www.instagram.com/diva.estetica.avanzata" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-outline hover:text-primary transition-colors duration-300">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       Vedi tutti i nostri lavori su Instagram
