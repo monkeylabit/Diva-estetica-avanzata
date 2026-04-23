@@ -422,40 +422,31 @@
 
 <!-- ─── RISULTATI ─── -->
 <section id="risultati" class="bg-surface py-8 overflow-hidden">
-  <div id="carousel" style="position:relative;padding:0 20px;overflow:hidden;">
+  <style>.c-card{flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);min-width:calc(50% - 5px);}@media(min-width:640px){.c-card{min-width:calc(33.333% - 7px);}}.c-card img{width:100%;height:220px;object-fit:cover;display:block;}@media(min-width:640px){.c-card img{height:260px;}}</style>
+  <div id="carousel" style="position:relative;padding:0 16px;overflow:hidden;">
     <div id="carousel-track" style="display:flex;gap:10px;transition:transform 0.5s cubic-bezier(.4,0,.2,1);">
-      <div style="min-width:calc(33.333% - 7px);flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);">
-        <img src="trasform/131D3DED-157B-4575-9BBB-20F043228297.JPEG" alt="Trasformazione" style="width:100%;height:240px;object-fit:cover;display:block;" loading="lazy"/>
-      </div>
-      <div style="min-width:calc(33.333% - 7px);flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);">
-        <img src="trasform/8A87A173-88A5-4D04-AFEA-B97823FDBF79.JPEG" alt="Trasformazione" style="width:100%;height:240px;object-fit:cover;display:block;" loading="lazy"/>
-      </div>
-      <div style="min-width:calc(33.333% - 7px);flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);">
-        <img src="trasform/A80C2E66-099F-4F5F-B9FD-BE429F1E199B.JPEG" alt="Trasformazione" style="width:100%;height:240px;object-fit:cover;display:block;" loading="lazy"/>
-      </div>
-      <div style="min-width:calc(33.333% - 7px);flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);">
-        <img src="trasform/CB4853A8-A34B-4A43-8F91-0ADB23E9A1F6.JPEG" alt="Trasformazione" style="width:100%;height:240px;object-fit:cover;display:block;" loading="lazy"/>
-      </div>
-      <div style="min-width:calc(33.333% - 7px);flex-shrink:0;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(28,27,27,0.08);">
-        <img src="trasform/FCB9EA68-4799-4AC3-BA2E-2B88ECE990FE.JPEG" alt="Trasformazione" style="width:100%;height:240px;object-fit:cover;display:block;" loading="lazy"/>
-      </div>
+      <div class="c-card"><img src="trasform/131D3DED-157B-4575-9BBB-20F043228297.JPEG" alt="Trasformazione" loading="lazy"/></div>
+      <div class="c-card"><img src="trasform/8A87A173-88A5-4D04-AFEA-B97823FDBF79.JPEG" alt="Trasformazione" loading="lazy"/></div>
+      <div class="c-card"><img src="trasform/A80C2E66-099F-4F5F-B9FD-BE429F1E199B.JPEG" alt="Trasformazione" loading="lazy"/></div>
+      <div class="c-card"><img src="trasform/CB4853A8-A34B-4A43-8F91-0ADB23E9A1F6.JPEG" alt="Trasformazione" loading="lazy"/></div>
+      <div class="c-card"><img src="trasform/FCB9EA68-4799-4AC3-BA2E-2B88ECE990FE.JPEG" alt="Trasformazione" loading="lazy"/></div>
     </div>
-    <!-- Dots -->
-    <div id="carousel-dots" style="display:flex;justify-content:center;gap:7px;margin-top:16px;margin-bottom:4px;">
-      <button onclick="cGoTo(0)" style="width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:1;transition:opacity .3s;"></button>
-      <button onclick="cGoTo(1)" style="width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:0.3;transition:opacity .3s;"></button>
-      <button onclick="cGoTo(2)" style="width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:0.3;transition:opacity .3s;"></button>
-    </div>
+    <div id="carousel-dots" style="display:flex;justify-content:center;gap:7px;margin-top:16px;margin-bottom:4px;"></div>
   </div>
   <script>(function(){
     var track=document.getElementById('carousel-track'),
-        dots=document.getElementById('carousel-dots').querySelectorAll('button'),
-        cur=0,n=3,timer,startX=0;
-    function cardW(){return track.children[0].offsetWidth+12;}
-    function cGoTo(i){cur=i;track.style.transform='translateX(-'+(cur*cardW())+'px)';dots.forEach(function(d,j){d.style.opacity=j===cur?'1':'0.3';});}
+        dotsEl=document.getElementById('carousel-dots'),
+        cur=0,timer,startX=0,n,dots;
+    function visible(){return window.innerWidth>=640?3:2;}
+    function total(){return 5;}
+    function buildDots(){n=total()-visible()+1;dotsEl.innerHTML='';dots=[];for(var i=0;i<n;i++){var b=document.createElement('button');b.style.cssText='width:8px;height:8px;border-radius:50%;background:#B37679;border:none;cursor:pointer;padding:0;opacity:'+(i===0?'1':'0.3')+';transition:opacity .3s;';b.setAttribute('data-i',i);b.onclick=(function(idx){return function(){cGoTo(idx);};})(i);dotsEl.appendChild(b);dots.push(b);}}
+    function cardW(){return track.children[0].offsetWidth+10;}
+    function cGoTo(i){cur=Math.max(0,Math.min(i,n-1));track.style.transform='translateX(-'+(cur*cardW())+'px)';dots.forEach(function(d,j){d.style.opacity=j===cur?'1':'0.3';});}
     window.cGoTo=cGoTo;
     function next(){cGoTo((cur+1)%n);}
+    buildDots();
     timer=setInterval(next,3000);
+    window.addEventListener('resize',function(){clearInterval(timer);buildDots();cGoTo(0);timer=setInterval(next,3000);});
     var el=document.getElementById('carousel');
     el.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;clearInterval(timer);},{passive:true});
     el.addEventListener('touchend',function(e){
