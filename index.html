@@ -773,4 +773,76 @@
     obs.observe(wrap);
 })();
 </script>
+
+<!-- ─── POPUP BENVENUTO NUOVO CLIENTE ─── -->
+<div id="welcome-popup" class="fixed inset-0 z-[9999] flex items-center justify-center p-4" style="display:none!important;">
+    <!-- Overlay -->
+    <div id="popup-overlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <!-- Card -->
+    <div class="relative bg-surface rounded-3xl shadow-2xl max-w-md w-full mx-auto overflow-hidden">
+        <!-- Fascia superiore decorativa -->
+        <div class="h-2 bg-primary w-full"></div>
+
+        <div class="px-10 py-10 text-center">
+            <!-- Icona / etichetta -->
+            <span class="inline-block text-xs font-body tracking-[0.4em] uppercase text-primary mb-4">Offerta di Benvenuto</span>
+
+            <!-- Titolo -->
+            <h2 class="font-headline text-4xl leading-tight text-on-surface mb-3">
+                Sei un nuovo cliente?
+            </h2>
+
+            <!-- Divisore -->
+            <div class="w-10 h-px bg-primary mx-auto mb-6"></div>
+
+            <!-- Testo -->
+            <p class="font-body text-base text-on-surface-variant leading-relaxed mb-8">
+                Per te il <span class="text-primary font-semibold text-lg">30% di sconto</span> sul tuo primo trattamento a scelta.<br/>
+                Prenota ora e inizia il tuo percorso di bellezza.
+            </p>
+
+            <!-- CTA -->
+            <a href="#contatti" id="popup-cta" class="block w-full bg-primary text-white font-body font-semibold text-sm tracking-widest uppercase py-4 rounded-xl hover:bg-primary/90 transition-colors duration-300 mb-4">
+                Prenota Ora
+            </a>
+
+            <!-- Chiudi -->
+            <button id="popup-close" class="text-xs font-body text-on-surface-variant/60 hover:text-on-surface-variant transition-colors duration-200 tracking-wide">
+                No grazie, continua senza sconto
+            </button>
+        </div>
+
+        <!-- Bottone X -->
+        <button id="popup-x" class="absolute top-4 right-4 text-on-surface-variant/50 hover:text-on-surface-variant transition-colors duration-200">
+            <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+    </div>
+</div>
+
+<script>
+(function () {
+    var STORAGE_KEY = 'diva_popup_seen';
+    var popup = document.getElementById('welcome-popup');
+
+    function closePopup() {
+        popup.style.display = 'none';
+        try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+    }
+
+    try {
+        if (localStorage.getItem(STORAGE_KEY)) return;
+    } catch(e) {}
+
+    setTimeout(function () {
+        popup.style.removeProperty('display');
+        popup.style.display = 'flex';
+    }, 1200);
+
+    document.getElementById('popup-overlay').addEventListener('click', closePopup);
+    document.getElementById('popup-close').addEventListener('click', closePopup);
+    document.getElementById('popup-x').addEventListener('click', closePopup);
+    document.getElementById('popup-cta').addEventListener('click', closePopup);
+})();
+</script>
+
 </body></html>
