@@ -583,10 +583,7 @@
             <div class="bg-white/8 border border-white/10 p-10 rounded-2xl backdrop-blur-sm">
                 <h3 class="text-2xl font-headline mb-2">Richiedi una Convenzione</h3>
                 <p class="text-white/50 text-sm mb-8">Ti ricontatteremo entro 24 ore.</p>
-                <form action="https://formsubmit.co/coccinelle.roma@gmail.com" method="POST" class="space-y-7">
-                    <input type="hidden" name="_subject" value="Nuova richiesta di convenzione - Diva Estetica">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
+                <form id="convenzione-form" class="space-y-7">
                     <div>
                         <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Nome Azienda / Ente</label>
                         <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" name="azienda" placeholder="es. Palestra Roma Sport" required/>
@@ -607,6 +604,36 @@
                         Invia Richiesta
                     </button>
                 </form>
+                <div id="convenzione-success" class="hidden text-center py-8">
+                    <span class="material-symbols-outlined text-5xl text-primary-fixed-dim mb-4 block">check_circle</span>
+                    <p class="text-white text-lg font-headline mb-2">Grazie per averci contattato!</p>
+                    <p class="text-white/60 text-sm">Risponderemo entro 24 ore.</p>
+                </div>
+                <script>
+                    document.getElementById('convenzione-form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const form = e.target;
+                        const btn = form.querySelector('button[type="submit"]');
+                        btn.disabled = true;
+                        btn.textContent = 'Invio in corso...';
+                        const data = new FormData(form);
+                        data.append('_subject', 'Nuova richiesta di convenzione - Diva Estetica');
+                        data.append('_captcha', 'false');
+                        data.append('_template', 'table');
+                        fetch('https://formsubmit.co/ajax/coccinelle.roma@gmail.com', {
+                            method: 'POST',
+                            headers: { 'Accept': 'application/json' },
+                            body: data
+                        }).then(function() {
+                            form.classList.add('hidden');
+                            document.getElementById('convenzione-success').classList.remove('hidden');
+                        }).catch(function() {
+                            btn.disabled = false;
+                            btn.textContent = 'Invia Richiesta';
+                            alert('Errore nell\'invio. Riprova.');
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
