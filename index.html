@@ -251,7 +251,7 @@
             <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#chi-siamo">Chi Siamo</a>
             <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#servizi">Servizi</a>
             <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#risultati">Risultati</a>
-            <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#convenzioni">Convenzioni</a>
+            <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#convenzioni">Appuntamenti</a>
             <a class="nav-link font-body tracking-widest uppercase text-xs text-on-surface-variant hover:text-primary transition-colors duration-300" href="#contatti">Contatti</a>
         </div>
         <!-- CTA -->
@@ -545,14 +545,14 @@
     <div class="container mx-auto px-8 md:px-12 max-w-screen-xl relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
-                <span class="text-xs font-body tracking-[0.4em] uppercase text-primary-fixed-dim mb-4 block">Collaborazioni</span>
-                <h2 class="text-5xl font-headline mb-6 leading-tight">Proposta di Convenzione</h2>
+                <span class="text-xs font-body tracking-[0.4em] uppercase text-primary-fixed-dim mb-4 block">Prenota</span>
+                <h2 class="text-5xl font-headline mb-6 leading-tight">Appuntamenti</h2>
                 <div class="w-12 h-px bg-primary-fixed-dim mb-8"></div>
-                <p class="text-lg text-white/65 mb-10 leading-relaxed">Diva Estetica Avanzata propone collaborazioni e convenzioni dedicate ad Aziende, Enti, Palestre e Associazioni.</p>
+                <p class="text-lg text-white/65 mb-10 leading-relaxed">Scrivici per essere ricontattato.</p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
                     <div>
-                        <h4 class="text-primary-fixed-dim text-lg font-headline mb-5">Vantaggi per i convenzionati</h4>
+                        <h4 class="text-primary-fixed-dim text-lg font-headline mb-5">Vantaggi per i clienti fidelizzati</h4>
                         <ul class="space-y-4 text-white/75">
                             <li class="flex items-start gap-3 text-sm">
                                 <span class="material-symbols-outlined text-primary-fixed-dim text-base mt-0.5">check_circle</span>
@@ -581,24 +581,20 @@
 
             <!-- Form -->
             <div class="bg-white/8 border border-white/10 p-10 rounded-2xl backdrop-blur-sm">
-                <h3 class="text-2xl font-headline mb-2">Richiedi una Convenzione</h3>
-                <p class="text-white/50 text-sm mb-8">Ti ricontatteremo entro 24 ore.</p>
+                <h3 class="text-2xl font-headline mb-2">Richiedi un Appuntamento</h3>
+                <p class="text-white/50 text-sm mb-8">Ti contatteremo entro 24 ore.</p>
                 <form id="convenzione-form" class="space-y-7">
                     <div>
-                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Nome Azienda / Ente</label>
-                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" name="azienda" placeholder="es. Palestra Roma Sport" required/>
+                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Nome e Cognome</label>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" name="nome" placeholder="es. Maria Rossi" required/>
                     </div>
                     <div>
-                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Referente</label>
-                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" name="referente" placeholder="Nome e Cognome" required/>
-                    </div>
-                    <div>
-                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Email Referente</label>
-                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="email" name="email" placeholder="email@azienda.it" required/>
+                        <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Email</label>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="email" name="email" placeholder="email@esempio.it" required/>
                     </div>
                     <div>
                         <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Telefono</label>
-                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="tel" name="telefono" placeholder="+39 000 000 0000"/>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="tel" name="telefono" placeholder="+39 000 000 0000" required/>
                     </div>
                     <button type="submit" class="w-full bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs mt-4 hover:opacity-90 transition-opacity duration-300">
                         Invia Richiesta
@@ -617,7 +613,7 @@
                         btn.disabled = true;
                         btn.textContent = 'Invio in corso...';
                         const data = new FormData(form);
-                        data.append('_subject', 'Nuova richiesta di convenzione - Diva Estetica');
+                        data.append('_subject', 'Nuova richiesta di appuntamento - Diva Estetica');
                         data.append('_captcha', 'false');
                         data.append('_template', 'table');
                         fetch('https://formsubmit.co/ajax/coccinelle.roma@gmail.com', {
