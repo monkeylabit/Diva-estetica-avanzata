@@ -583,24 +583,27 @@
             <div class="bg-white/8 border border-white/10 p-10 rounded-2xl backdrop-blur-sm">
                 <h3 class="text-2xl font-headline mb-2">Richiedi una Convenzione</h3>
                 <p class="text-white/50 text-sm mb-8">Ti ricontatteremo entro 24 ore.</p>
-                <form class="space-y-7">
+                <form action="https://formsubmit.co/coccinelle.roma@gmail.com" method="POST" class="space-y-7">
+                    <input type="hidden" name="_subject" value="Nuova richiesta di convenzione - Diva Estetica">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
                     <div>
                         <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Nome Azienda / Ente</label>
-                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" placeholder="es. Palestra Roma Sport"/>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" name="azienda" placeholder="es. Palestra Roma Sport" required/>
                     </div>
                     <div>
                         <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Referente</label>
-                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" placeholder="Nome e Cognome"/>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="text" name="referente" placeholder="Nome e Cognome" required/>
                     </div>
                     <div>
                         <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Email Referente</label>
-                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="email" placeholder="email@azienda.it"/>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="email" name="email" placeholder="email@azienda.it" required/>
                     </div>
                     <div>
                         <label class="font-body text-xs uppercase tracking-widest text-white/50 block mb-2">Telefono</label>
-                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="tel" placeholder="+39 000 000 0000"/>
+                        <input class="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-primary-fixed-dim transition-colors text-white placeholder:text-white/30 text-sm" type="tel" name="telefono" placeholder="+39 000 000 0000"/>
                     </div>
-                    <button class="w-full bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs mt-4 hover:opacity-90 transition-opacity duration-300">
+                    <button type="submit" class="w-full bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs mt-4 hover:opacity-90 transition-opacity duration-300">
                         Invia Richiesta
                     </button>
                 </form>
