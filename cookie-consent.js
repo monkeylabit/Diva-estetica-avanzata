@@ -23,7 +23,7 @@
   banner.innerHTML =
     '<p style="color:rgba(255,255,255,0.6);font-size:0.78rem;margin:0;max-width:720px;line-height:1.7;">' +
       'Utilizziamo cookie tecnici e di terze parti (Google Maps, Google Fonts) per garantire il corretto funzionamento del sito. ' +
-      'Consulta la nostra <a href="https://www.iubenda.com/privacy-policy/82244057/cookie-policy" target="_blank" rel="noopener" ' +
+      'Consulta la nostra <a href="cookie-policy.html" ' +
       'style="color:#fab5b7;text-decoration:underline;">Cookie Policy</a>.' +
     '</p>' +
     '<div style="display:flex;gap:0.75rem;flex-shrink:0;">' +
